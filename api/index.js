@@ -40,12 +40,12 @@ module.exports = async (request, response) => {
     const signature = request.headers['x-signature-ed25519'];
     const timestamp = request.headers['x-signature-timestamp'];
     const rawBody = await getRawBody(request);
-
+    console.error('req coming');
     const isValidRequest = verifyKey(
       rawBody,
       signature,
       timestamp,
-      process.env.PUBLIC_KEY
+     "7bf5345a2e1cf33b93f41d841b499584e2a205d7b88306eb7b9017ff9aab1c24"
     );
 
     if (!isValidRequest) {
