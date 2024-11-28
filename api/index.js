@@ -7,7 +7,7 @@ const getRawBody = require('raw-body');
 
 const SLAP_COMMAND = {
   name: 'Slap',
-  description: 'Sometimes you gotta slap a person with a large trout',
+  description: 'Sometimes  A you gotta slap a person with a large trout',
   options: [
     {
       name: 'user',
