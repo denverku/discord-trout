@@ -6,9 +6,6 @@ const {
 const axios = require('axios');
 const getRawBody = require('raw-body');
 
-const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
-
-
 
 const SLAP_COMMAND = {
   name: 'Slap',
@@ -48,19 +45,17 @@ const registerCommands = async () => {
   ];
 
   try {
-    const response = await fetch(url, {
-      method: 'PUT',
+    const response = await axios.put(url, commandData, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
       },
-      body: JSON.stringify(commandData),
     });
 
-    if (!response.ok) {
-      console.error('Failed to register commands:', response.statusText);
-    } else {
+    if (response.status === 200) {
       console.log('Commands registered globally successfully!');
+    } else {
+      console.error('Failed to register commands:', response.statusText);
     }
   } catch (error) {
     console.error('Error registering commands:', error);
