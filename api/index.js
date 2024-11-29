@@ -54,7 +54,7 @@ const registerCommands = async () => {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
       },
-      body: JSON.stringify(commandData),
+      body: JSON.stringify([SLAP_COMMAND, INVITE_COMMAND]),
     });
 
     if (!response.ok) {
