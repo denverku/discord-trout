@@ -44,6 +44,14 @@ const registerCommands = async () => {
       name: 'ping',
       description: 'Responds with Pong!',
       type: 1, // Slash command type
+    },{
+      name: 'Invite',
+      description: 'Responds with Pong!',
+      type: 1, // Slash command type
+    },{
+      name: 'Support',
+      description: 'Responds with Pong!',
+      type: 1, // Slash command type
     },
   ];
 
@@ -54,7 +62,7 @@ const registerCommands = async () => {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
       },
-      body: JSON.stringify([SLAP_COMMAND, INVITE_COMMAND]),
+      body: JSON.stringify(commandData),
     });
 
     if (!response.ok) {
