@@ -48,10 +48,10 @@ module.exports = async (request, response) => {
      "7bf5345a2e1cf33b93f41d841b499584e2a205d7b88306eb7b9017ff9aab1c24"
     );
 
-    /*if (!isValidRequest) {
+    if (!isValidRequest) {
       console.error('Invalid Request');
       return response.status(401).send({ error: 'Bad request signature ' });
-    }*/
+    }
 
     const message = request.body;
 
