@@ -35,16 +35,47 @@ const SUPPORT_COMMAND = {
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
 
-const commands = [SLAP_COMMAND, INVITE_COMMAND, SUPPORT_COMMAND];
+const registerCommands = async () => {
+  const commands = [
+    {
+      name: 'slap',
+      description: 'Slap a user with a large trout',
+      options: [
+        {
+          name: 'user',
+          description: 'User to slap',
+          type: 6, // Type 6 is for user
+          required: true
+        }
+      ]
+    },
+    {
+      name: 'invite',
+      description: 'Get an invite link to add the bot to your server'
+    },
+    {
+      name: 'support',
+      description: 'Support the bot if you like it'
+    }
+  ];
 
-// Register commands with Discord API
-axios.post(url, commands, {
-  headers: {
-    Authorization: `Bot ${process.env.TOKEN}`,
-  },
-})
-  .then(response => console.log('Commands registered'))
-  .catch(console.error);
+  const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
+
+  try {
+    const response = await axios.post(url, commands, {
+      headers: {
+        Authorization: `Bot ${process.env.TOKEN}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    console.log('Commands registered:', response.data);
+  } catch (error) {
+    console.error('Error registering commands:', error.response?.data || error.message);
+  }
+};
+
+registerCommands();
 
 /**
  * Gotta see someone 'bout a trout
