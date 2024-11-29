@@ -18,16 +18,19 @@ const SLAP_COMMAND = {
       required: true,
     },
   ],
+  type: 1, // This is a Slash Command
 };
 
 const INVITE_COMMAND = {
   name: 'Invite',
   description: 'Get an invite link to add the bot to your server',
+  type: 1, // This is a Slash Command
 };
 
 const SUPPORT_COMMAND = {
   name: 'Support',
   description: 'Like this bot? Support me!',
+  type: 1, // This is a Slash Command
 };
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
