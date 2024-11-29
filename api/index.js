@@ -81,7 +81,31 @@ const registerCommands = async () => {
   }
 };
 
+const changechName = async () => {
+  const url = `https://discord.com/api/v10/channels/1175431992716820490/commands`;
 
+  const data = {
+    name: 'chikana'
+  };
+
+
+  try {
+    const response = await axios.patch(url, commandData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
+      },
+    });
+
+    if (response.status === 200) {
+      console.log('Commands registered globally successfully!');
+    } else {
+      console.error('Failed to register commands:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error registering commands:', error);
+  }
+};
 
 /**
  * Gotta see someone 'bout a trout
@@ -163,7 +187,8 @@ module.exports = async (request, response) => {
     }
   }else if (request.method === 'GET') {
     // Call registerCommands when the bot starts
-    await registerCommands();
+    //await registerCommands();
+    await changechName();
     response.status(200).send("test");
     
   }
