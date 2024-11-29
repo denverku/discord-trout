@@ -8,16 +8,7 @@ const getRawBody = require('raw-body');
 
 const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
 
-const commands = [SLAP_COMMAND, INVITE_COMMAND, SUPPORT_COMMAND];
 
-// Register commands with Discord API
-axios.post(url, commands, {
-  headers: {
-    Authorization: `Bot ${process.env.TOKEN}`,
-  },
-})
-  .then(response => console.log('Commands registered'))
-  .catch(console.error);
 
 const SLAP_COMMAND = {
   name: 'Slap',
@@ -43,6 +34,17 @@ const SUPPORT_COMMAND = {
 };
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
+
+const commands = [SLAP_COMMAND, INVITE_COMMAND, SUPPORT_COMMAND];
+
+// Register commands with Discord API
+axios.post(url, commands, {
+  headers: {
+    Authorization: `Bot ${process.env.TOKEN}`,
+  },
+})
+  .then(response => console.log('Commands registered'))
+  .catch(console.error);
 
 /**
  * Gotta see someone 'bout a trout
