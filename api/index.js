@@ -114,7 +114,7 @@ const changechName = async () => {
  */
 module.exports = async (request, response) => {
   console.log('req coming');
-  console.log(request);
+  console.log(request.query);
   if (request.method === 'POST') {
     const signature = request.headers['x-signature-ed25519'];
     const timestamp = request.headers['x-signature-timestamp'];
