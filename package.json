@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ianmitchell/discord-trout#readme",
   "dependencies": {
+    "axios": "^1.5.0",
     "discord-interactions": "^2.0.2",
     "dotenv": "^8.2.0",
     "raw-body": "^2.4.1"
