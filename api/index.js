@@ -8,7 +8,7 @@ const getRawBody = require('raw-body');
 
 
 const SLAP_COMMAND = {
-  name: 'Slap',
+  name: 'slap',
   description: 'Sometimes A you gotta slap a person with a large trout',
   options: [
     {
@@ -22,13 +22,13 @@ const SLAP_COMMAND = {
 };
 
 const INVITE_COMMAND = {
-  name: 'Invite',
+  name: 'invite',
   description: 'Get an invite link to add the bot to your server',
   type: 1, // This is a Slash Command
 };
 
 const SUPPORT_COMMAND = {
-  name: 'Support',
+  name: 'support',
   description: 'Like this bot? Support me!',
   type: 1, // This is a Slash Command
 };
