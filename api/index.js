@@ -35,24 +35,26 @@ const SUPPORT_COMMAND = {
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
 
-// Register commands with Discord API
 const registerCommands = async () => {
   const url = `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands`;
 
   const commandData = [
-   
     {
       name: 'support',
-      description: 'Responds with supoty!',
+      description: 'Responds with support!',
       type: 1, // Slash command type
     },
+    {
+      name: 'invite',
+      description: 'Generates an invite link',
+      type: 1,
+    },
+    {
+      name: 'slap',
+      description: 'Slaps someone',
+      type: 1,
+    }
   ];
-
-  /*const commandData = [
-    INVITE_COMMAND,
-    SUPPORT_COMMAND,
-    SLAP_COMMAND,
-  ];*/
 
   try {
     const response = await axios.put(url, commandData, {
