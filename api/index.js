@@ -37,7 +37,7 @@ const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env
 
 // Register commands with Discord API
 const registerCommands = async () => {
-  const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
+  const url = `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands`;
 
   const commandData = [
     {
@@ -49,7 +49,7 @@ const registerCommands = async () => {
 
   try {
     const response = await fetch(url, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
