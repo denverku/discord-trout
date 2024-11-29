@@ -3,7 +3,21 @@ const {
   InteractionType,
   verifyKey,
 } = require('discord-interactions');
+const axios = require('axios');
 const getRawBody = require('raw-body');
+
+const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
+
+const commands = [SLAP_COMMAND, INVITE_COMMAND, SUPPORT_COMMAND];
+
+// Register commands with Discord API
+axios.post(url, commands, {
+  headers: {
+    Authorization: `Bot ${process.env.TOKEN}`,
+  },
+})
+  .then(response => console.log('Commands registered'))
+  .catch(console.error);
 
 const SLAP_COMMAND = {
   name: 'Slap',
@@ -39,7 +53,12 @@ module.exports = async (request, response) => {
   if (request.method === 'POST') {
     const signature = request.headers['x-signature-ed25519'];
     const timestamp = request.headers['x-signature-timestamp'];
+
+    //const rawBody = await getRawBody(request);
     const rawBody = await getRawBody(request);
+      //const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
+
+
     console.error('req coming');
     const isValidRequest = verifyKey(
       rawBody,
@@ -53,7 +72,8 @@ module.exports = async (request, response) => {
       return response.status(401).send({ error: 'Bad request signature ' });
     }
 
-    const message = request.body;
+     const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
+    //const message = request.body;
 
     if (message.type === InteractionType.PING) {
       console.log('Handling Ping request');
