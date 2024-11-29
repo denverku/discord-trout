@@ -41,15 +41,7 @@ const registerCommands = async () => {
 
   const commandData = [
     {
-      name: 'ping',
-      description: 'Responds with Pong!',
-      type: 1, // Slash command type
-    },{
-      name: 'Invite',
-      description: 'Responds with Pong!',
-      type: 1, // Slash command type
-    },{
-      name: 'Support',
+      name: 'invite',
       description: 'Responds with Pong!',
       type: 1, // Slash command type
     },
