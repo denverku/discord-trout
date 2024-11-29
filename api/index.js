@@ -57,7 +57,7 @@ const registerCommands = async () => {
   ];*/
 
   const commandData = [
-    
+    SLAP_COMMAND,
     INVITE_COMMAND,
     SUPPORT_COMMAND
   ];
