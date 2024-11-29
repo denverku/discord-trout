@@ -161,8 +161,9 @@ module.exports = async (request, response) => {
       response.status(400).send({ error: 'Unknown Type' });
     }
   }else if (request.method === 'GET') {
-    response.status(200).send("test");
     // Call registerCommands when the bot starts
-    registerCommands();
+    await registerCommands();
+    response.status(200).send("test");
+    
   }
 };
