@@ -82,7 +82,7 @@ const registerCommands = async () => {
 };
 
 const changechName = async () => {
-  const url = `https://discord.com/api/v10/channels/1175431992716820490/commands`;
+  const url = `https://discord.com/api/v10/channels/1175431992716820490`;
 
   const data = {
     name: 'chikana'
