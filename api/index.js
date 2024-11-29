@@ -35,46 +35,39 @@ const SUPPORT_COMMAND = {
 
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
 
+// Register commands with Discord API
 const registerCommands = async () => {
-  const commands = [
-    {
-      name: 'slap',
-      description: 'Slap a user with a large trout',
-      options: [
-        {
-          name: 'user',
-          description: 'User to slap',
-          type: 6, // Type 6 is for user
-          required: true
-        }
-      ]
-    },
-    {
-      name: 'invite',
-      description: 'Get an invite link to add the bot to your server'
-    },
-    {
-      name: 'support',
-      description: 'Support the bot if you like it'
-    }
-  ];
-
   const url = `https://discord.com/api/v10/applications/${process.env.APPLICATION_ID}/commands`;
 
+  const commandData = [
+    {
+      name: 'ping',
+      description: 'Responds with Pong!',
+      type: 1, // Slash command type
+    },
+  ];
+
   try {
-    const response = await axios.post(url, commands, {
+    const response = await fetch(url, {
+      method: 'POST',
       headers: {
-        Authorization: `Bot ${process.env.TOKEN}`,
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+        'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
+      },
+      body: JSON.stringify(commandData),
     });
 
-    console.log('Commands registered:', response.data);
+    if (!response.ok) {
+      console.error('Failed to register commands:', response.statusText);
+    } else {
+      console.log('Commands registered globally successfully!');
+    }
   } catch (error) {
-    console.error('Error registering commands:', error.response?.data || error.message);
+    console.error('Error registering commands:', error);
   }
 };
 
+// Call registerCommands when the bot starts
 registerCommands();
 
 /**
