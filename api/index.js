@@ -113,6 +113,8 @@ const changechName = async () => {
  * @param {VercelResponse} response
  */
 module.exports = async (request, response) => {
+  console.log('req coming');
+  console.log(request);
   if (request.method === 'POST') {
     const signature = request.headers['x-signature-ed25519'];
     const timestamp = request.headers['x-signature-timestamp'];
@@ -122,7 +124,7 @@ module.exports = async (request, response) => {
       //const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
 
 
-    console.log('req coming');
+    
     const isValidRequest = verifyKey(
       rawBody,
       signature,
@@ -187,8 +189,8 @@ module.exports = async (request, response) => {
     }
   }else if (request.method === 'GET') {
     // Call registerCommands when the bot starts
-    //await registerCommands();
-    await changechName();
+    await registerCommands();
+    //await changechName();
     response.status(200).send("test");
     
   }
