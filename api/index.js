@@ -40,11 +40,7 @@ const registerCommands = async () => {
   const url = `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands`;
 
   const commandData = [
-    {
-      name: 'invite',
-      description: 'Responds with Pong!',
-      type: 1, // Slash command type
-    },
+   
     {
       name: 'support',
       description: 'Responds with supoty!',
