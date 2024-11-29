@@ -154,5 +154,7 @@ module.exports = async (request, response) => {
       console.error('Unknown Type');
       response.status(400).send({ error: 'Unknown Type' });
     }
+  }else if (request.method === 'GET') {
+    response.status(200).send("test");
   }
 };
