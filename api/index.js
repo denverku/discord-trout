@@ -98,7 +98,7 @@ module.exports = async (request, response) => {
       //const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
 
 
-    console.error('req coming');
+    console.log('req coming');
     const isValidRequest = verifyKey(
       rawBody,
       signature,
@@ -112,6 +112,7 @@ module.exports = async (request, response) => {
     }
 
      const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
+     console.log(message);
     //const message = request.body;
 
     if (message.type === InteractionType.PING) {
