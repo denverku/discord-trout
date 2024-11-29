@@ -38,7 +38,7 @@ const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env
 const registerCommands = async () => {
   const url = `https://discord.com/api/v8/applications/${process.env.APPLICATION_ID}/commands`;
 
-  const commandData = [
+  /*const commandData = [
     {
       name: 'support',
       description: 'Responds with support!',
@@ -54,7 +54,14 @@ const registerCommands = async () => {
       description: 'Slaps someone',
       type: 1,
     }
+  ];*/
+
+  const commandData = [
+    SLAP_COMMAND,
+    INVITE_COMMAND,
+    SUPPORT_COMMAND
   ];
+
 
   try {
     const response = await axios.put(url, commandData, {
@@ -74,8 +81,7 @@ const registerCommands = async () => {
   }
 };
 
-// Call registerCommands when the bot starts
-registerCommands();
+
 
 /**
  * Gotta see someone 'bout a trout
@@ -156,5 +162,7 @@ module.exports = async (request, response) => {
     }
   }else if (request.method === 'GET') {
     response.status(200).send("test");
+    // Call registerCommands when the bot starts
+    registerCommands();
   }
 };
