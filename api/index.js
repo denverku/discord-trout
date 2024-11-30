@@ -225,13 +225,7 @@ module.exports = async (request, response) => {
           break;
       }*/
           try {
-            response.status(200).send({
-              type: 4,
-              data: {
-                content: "Searching...",
-                flags: 64,
-              },
-            });
+            
             const url = `https://discord.com/api/v10/channels/1175431992716820490/messages`;
             const data = {
               content: 'chikana'
