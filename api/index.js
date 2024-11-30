@@ -225,10 +225,11 @@ module.exports = async (request, response) => {
           break;
       }*/
           try {
-            
-            const url = `https://discord.com/api/v10/channels/1175431992716820490/messages`;
+            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
+
+            const url = `https://discord.com/api/v10/channels/${message.channel_id}/messages`;
             const data = {
-              content: 'chikana'
+              content: a.data.response
             };
             const aa = await axios.post(url, data, {
               headers: {
