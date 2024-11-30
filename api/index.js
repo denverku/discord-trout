@@ -123,6 +123,8 @@ const changechName = async () => {
   }
 };
 
+
+
 /**
  * Gotta see someone 'bout a trout
  * @param {VercelRequest} request
@@ -230,23 +232,22 @@ module.exports = async (request, response) => {
                 flags: 64,
               },
             });
-            // Now that we've acknowledged, let's process the API request asynchronously
-            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=help`);
-
-            // Make the API request and wait for the result
-            const rr = await axios.patch(
-              `https://discord.com/api/v9/channels/${message.channel_id}/messages/${message.id}`,
-              {
-                content: a.data,
+            const url = `https://discord.com/api/v10/channels/1175431992716820490/messages`;
+            const data = {
+              content: 'chikana'
+            };
+            const aa = await axios.post(url, data, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
               },
-              {
-                headers: {
-                  'Authorization': `Bot ${process.env.TOKEN}`,
-                  'Content-Type': 'application/json',
-                },
-              }
-            );
-            console.log(rr);
+            });
+            
+            if (aa.status === 200) {
+              console.log('Commands registered globally successfully!');
+            } else {
+              console.error('Failed to register commands:', aa.statusText);
+            }
           } catch (error) {
             // Handle errors if the API call fails
             console.error("Error while making the API request:", error);
