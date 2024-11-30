@@ -195,14 +195,8 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          response.status(200).send({
-            type: 4,
-            data: {
-              content: "love",
-              flags: 64,
-            },
-          });
-          /*try {
+          
+          try {
             // Make the API request and wait for the result
             const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
 
@@ -221,7 +215,7 @@ module.exports = async (request, response) => {
             // Handle errors if the API call fails
             console.error("Error while making the API request:", error);
             response.status(500).send({ content: "An error occurred." });
-          }*/
+          }
           break;
         default:
           console.error('Unknown Command');
@@ -244,7 +238,20 @@ module.exports = async (request, response) => {
       //await changechName();
       response.status(200).send("test");
     } else if (req == 'wa') {
+      try {
+        // Make the API request and wait for the result
+        const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
 
+        // Log the result to see what is returned
+        console.log(a.data);
+
+        // Send the response back after the request is completed
+        response.status(200).send(a.data);
+      } catch (error) {
+        // Handle errors if the API call fails
+        console.error("Error while making the API request:", error);
+        response.status(500).send({ content: "An error occurred." });
+      }
     } else {
       response.status(200).send("hola");
     }
