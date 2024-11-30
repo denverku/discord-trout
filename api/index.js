@@ -36,6 +36,14 @@ const SUPPORT_COMMAND = {
 const GPT_COMMAND = {
   name: 'ask',
   description: 'Ask ai!',
+  options: [
+    {
+      name: 'q',
+      description: 'question',
+      type: 3,
+      required: true,
+    },
+  ],
   type: 1, // This is a Slash Command
 };
 
@@ -187,14 +195,14 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          axios.get('https://api.kenliejugarap.com/freegpt-openai/?question=Hello')
-            .then(response => {
+          axios.get('https://api.kenliejugarap.com/freegpt-openai/?question='+message.data.options[0].value)
+            .then(a => {
               // Handle success
-              console.log(response.data);
+              console.log(a.data);
               response.status(200).send({
                 type: 4,
                 data: {
-                  content: response.data,
+                  content: a.data,
                   flags: 64,
                 },
               });
