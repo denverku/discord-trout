@@ -224,7 +224,11 @@ module.exports = async (request, response) => {
       }*/
           try {
             response.status(200).send({
-              type: 1, // ACK response
+              type: 4,
+              data: {
+                content: "Searching...",
+                flags: 64,
+              },
             });
             // Make the API request and wait for the result
             await axios.post(`https://discord.com/api/v9/interactions/${message.id}/${message.token}/callback`, {
