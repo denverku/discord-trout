@@ -195,24 +195,16 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          await axios.get('https://api.kenliejugarap.com/freegpt-openai/?question='+message.data.options[0].value)
-            .then(a => {
-              // Handle success
-              console.log(a.data);
-              response.status(200).send({
-                type: 4,
-                data: {
-                  content: a.data,
-                  flags: 64,
-                },
-              });
-            })
-            .catch(error => {
-              // Handle error
-              console.log(error);
-            });
-          
-          
+          const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(question)}`);
+          console.log(a.data);
+          response.status(200).send({
+            type: 4,
+            data: {
+              content: a.data,
+              flags: 64,
+            },
+          });
+
           break;
         default:
           console.error('Unknown Command');
