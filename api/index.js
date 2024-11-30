@@ -230,6 +230,9 @@ module.exports = async (request, response) => {
                 flags: 64,
               },
             });
+            // Now that we've acknowledged, let's process the API request asynchronously
+            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=help`);
+
             // Make the API request and wait for the result
             await axios.post(`https://discord.com/api/v9/interactions/${message.id}/${message.token}/callback`, {
               type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
