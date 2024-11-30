@@ -199,7 +199,7 @@ module.exports = async (request, response) => {
         case GPT_COMMAND.name.toLowerCase():
 
           try {
-            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${message.data.options[0].value}`);
+            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0].value)}`);
 
             const url = `https://discord.com/api/v10/channels/${message.channel_id}/messages`;
             const data = {
