@@ -224,7 +224,7 @@ module.exports = async (request, response) => {
       }*/
           try {
             // Make the API request and wait for the result
-            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
+            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=help`);
 
             // Log the result to see what is returned
             console.log(a.data);
