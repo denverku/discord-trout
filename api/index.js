@@ -235,7 +235,7 @@ module.exports = async (request, response) => {
 
             // Make the API request and wait for the result
             await axios.post(
-              `https://discord.com/api/v9/channels/${message.channel_id}/messages`,
+              `https://discord.com/api/v9/channels/${message.channel.id}/messages`,
               {
                 content: a.data,
               },
