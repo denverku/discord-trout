@@ -165,7 +165,7 @@ module.exports = async (request, response) => {
         type: InteractionResponseType.PONG,
       });
     } else if (message.type === InteractionType.APPLICATION_COMMAND) {
-      /*switch (message.data.name.toLowerCase()) {
+      switch (message.data.name.toLowerCase()) {
         case SLAP_COMMAND.name.toLowerCase():
           response.status(200).send({
             type: 4,
@@ -197,35 +197,9 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          
-          try {
-            // Make the API request and wait for the result
-            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
 
-            // Log the result to see what is returned
-            console.log(a.data);
-
-            // Send the response back after the request is completed
-            response.status(200).send({
-              type: 4,
-              data: {
-                content: a.data,
-                flags: 64,
-              },
-            });
-          } catch (error) {
-            // Handle errors if the API call fails
-            console.error("Error while making the API request:", error);
-            response.status(500).send({ content: "An error occurred." });
-          }
-          break;
-        default:
-          console.error('Unknown Command');
-          response.status(400).send({ error: 'Unknown Type' });
-          break;
-      }*/
           try {
-            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${message.data.options[0]}`);
+            const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${message.data.options[0].value}`);
 
             const url = `https://discord.com/api/v10/channels/${message.channel_id}/messages`;
             const data = {
@@ -237,7 +211,7 @@ module.exports = async (request, response) => {
                 'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
               },
             });
-            
+
             if (aa.status === 200) {
               console.log('Commands registered globally successfully!');
             } else {
@@ -248,6 +222,13 @@ module.exports = async (request, response) => {
             console.error("Error while making the API request:", error);
             response.status(500).send({ content: "An error occurred." });
           }
+          break;
+        default:
+          console.error('Unknown Command');
+          response.status(400).send({ error: 'Unknown Type' });
+          break;
+      }
+
     } else {
       console.error('Unknown Type');
       response.status(400).send({ error: 'Unknown Type' });
