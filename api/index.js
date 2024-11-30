@@ -106,7 +106,7 @@ const changechName = async () => {
 
 
   try {
-    const response = await axios.get(url, data, {
+    const response = await axios.patch(url, data, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
