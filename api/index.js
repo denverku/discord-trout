@@ -101,7 +101,7 @@ const changechName = async () => {
   const url = `https://discord.com/api/v10/channels/1175431992716820490`;
 
   const data = {
-    name: 'chikana'
+    name: 'chikan'
   };
 
 
@@ -243,6 +243,9 @@ module.exports = async (request, response) => {
     if (req == 'RegCmd') {
       await registerCommands();
       //await changechName();
+      response.status(200).send("test");
+    } else if (req == 'cn') {
+      await changechName();
       response.status(200).send("test");
     } else if (req == 'wa') {
       try {
