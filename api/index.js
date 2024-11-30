@@ -33,6 +33,12 @@ const SUPPORT_COMMAND = {
   type: 1, // This is a Slash Command
 };
 
+const GPT_COMMAND = {
+  name: 'ask',
+  description: 'Ask ai!',
+  type: 1, // This is a Slash Command
+};
+
 const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${process.env.APPLICATION_ID}&scope=applications.commands`;
 
 const registerCommands = async () => {
@@ -59,7 +65,9 @@ const registerCommands = async () => {
   const commandData = [
     SLAP_COMMAND,
     INVITE_COMMAND,
-    SUPPORT_COMMAND
+    SUPPORT_COMMAND,
+    GPT_COMMAND
+
   ];
 
 
@@ -90,7 +98,7 @@ const changechName = async () => {
 
 
   try {
-    const response = await axios.patch(url, data, {
+    const response = await axios.get(url, data, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bot ${process.env.TOKEN}`, // Replace with your bot token
@@ -121,15 +129,15 @@ module.exports = async (request, response) => {
 
     //const rawBody = await getRawBody(request);
     const rawBody = await getRawBody(request);
-      //const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
+    //const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
 
 
-    
+
     const isValidRequest = verifyKey(
       rawBody,
       signature,
       timestamp,
-     "7bf5345a2e1cf33b93f41d841b499584e2a205d7b88306eb7b9017ff9aab1c24"
+      "7bf5345a2e1cf33b93f41d841b499584e2a205d7b88306eb7b9017ff9aab1c24"
     );
 
     if (!isValidRequest) {
@@ -137,8 +145,8 @@ module.exports = async (request, response) => {
       return response.status(401).send({ error: 'Bad request signature ' });
     }
 
-     const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
-     console.log(message);
+    const message = JSON.parse(rawBody.toString());  // Parse the raw body to JSON
+    console.log(message);
     //const message = request.body;
 
     if (message.type === InteractionType.PING) {
@@ -178,6 +186,26 @@ module.exports = async (request, response) => {
           });
           console.log('Support request');
           break;
+        case GPT_COMMAND.name.toLowerCase():
+          axios.get('https://api.kenliejugarap.com/freegpt-openai/?question=Hello')
+            .then(response => {
+              // Handle success
+              console.log(response.data);
+              response.status(200).send({
+                type: 4,
+                data: {
+                  content: response.data,
+                  flags: 64,
+                },
+              });
+            })
+            .catch(error => {
+              // Handle error
+              console.log(error);
+            });
+          
+          
+          break;
         default:
           console.error('Unknown Command');
           response.status(400).send({ error: 'Unknown Type' });
@@ -187,20 +215,20 @@ module.exports = async (request, response) => {
       console.error('Unknown Type');
       response.status(400).send({ error: 'Unknown Type' });
     }
-  }else if (request.method === 'GET') {
+  } else if (request.method === 'GET') {
     /*/ Call registerCommands when the bot starts
     await registerCommands();
     //await changechName();
     response.status(200).send("test");
     */
     const { req } = request.query;
-    if(req == 'RegCmd'){
+    if (req == 'RegCmd') {
       await registerCommands();
       //await changechName();
       response.status(200).send("test");
-    }else if(req == 'wa'){
-      
-    }else{
+    } else if (req == 'wa') {
+
+    } else {
       response.status(200).send("hola");
     }
   }
