@@ -188,10 +188,20 @@ module.exports = async (request, response) => {
       response.status(400).send({ error: 'Unknown Type' });
     }
   }else if (request.method === 'GET') {
-    // Call registerCommands when the bot starts
+    /*/ Call registerCommands when the bot starts
     await registerCommands();
     //await changechName();
     response.status(200).send("test");
-    
+    */
+    const { req } = request.query;
+    if(req == 'RegCmd'){
+      await registerCommands();
+      //await changechName();
+      response.status(200).send("test");
+    }else if(req == 'wa'){
+      
+    }else{
+      response.status(200).send("hola");
+    }
   }
 };
