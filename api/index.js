@@ -234,7 +234,7 @@ module.exports = async (request, response) => {
             const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=help`);
 
             // Make the API request and wait for the result
-            const response = await axios.post(
+            await axios.post(
               `https://discord.com/api/v9/channels/${message.channel_id}/messages`,
               {
                 content: a.data,
