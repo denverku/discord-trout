@@ -234,8 +234,8 @@ module.exports = async (request, response) => {
             const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=help`);
 
             // Make the API request and wait for the result
-            await axios.post(
-              `https://discord.com/api/v9/channels/${message.channel.id}/messages`,
+            const rr = await axios.patch(
+              `https://discord.com/api/v9/channels/${message.channel_id}/messages/${message.id}`,
               {
                 content: a.data,
               },
@@ -246,6 +246,7 @@ module.exports = async (request, response) => {
                 },
               }
             );
+            console.log(rr);
           } catch (error) {
             // Handle errors if the API call fails
             console.error("Error while making the API request:", error);
