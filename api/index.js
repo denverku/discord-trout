@@ -195,7 +195,7 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(question)}`);
+          const a = await axios.get(`https://api.kenliejugarap.com/freegpt-openai/?question=${encodeURIComponent(message.data.options[0])}`);
           console.log(a.data);
           response.status(200).send({
             type: 4,
