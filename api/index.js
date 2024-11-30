@@ -195,7 +195,7 @@ module.exports = async (request, response) => {
           console.log('Support request');
           break;
         case GPT_COMMAND.name.toLowerCase():
-          axios.get('https://api.kenliejugarap.com/freegpt-openai/?question='+message.data.options[0].value)
+          await axios.get('https://api.kenliejugarap.com/freegpt-openai/?question='+message.data.options[0].value)
             .then(a => {
               // Handle success
               console.log(a.data);
